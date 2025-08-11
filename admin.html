@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leads Admin</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#111;color:#eee;margin:24px}
+    .card{background:#1b1b1b;border:1px solid #2a2a2a;border-radius:12px;padding:16px;max-width:980px}
+    input,button{padding:10px 12px;border-radius:10px;border:1px solid #2a2a2a;background:#101010;color:#eee}
+    button{background:#ffd36a;color:#222;border-color:#ffd36a;font-weight:800;cursor:pointer}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{border-bottom:1px solid #2a2a2a;padding:10px;text-align:left;font-size:14px}
+    .row{display:flex;gap:8px;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 style="margin-top:0">관리자 로그인</h2>
+    <div class="row">
+      <input id="email" type="email" placeholder="이메일" />
+      <input id="pw" type="password" placeholder="비밀번호" />
+      <button id="loginBtn">로그인</button>
+      <span id="authMsg"></span>
+    </div>
+  </div>
+
+  <div id="panel" class="card" style="margin-top:16px; display:none">
+    <div style="display:flex; justify-content:space-between; align-items:center">
+      <h2 style="margin:0">리드 목록</h2>
+      <div class="row">
+        <button id="refreshBtn">새로고침</button>
+        <button id="logoutBtn" style="background:#333;color:#eee;border-color:#333">로그아웃</button>
+      </div>
+    </div>
+    <table id="tbl">
+      <thead><tr><th>이름</th><th>연락처</th><th>등록시각</th><th>UA</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+    // 🔧 Firebase Config (index.html 과 동일한 값)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+
+    const email   = document.getElementById('email');
+    const pw      = document.getElementById('pw');
+    const loginBtn= document.getElementById('loginBtn');
+    const authMsg = document.getElementById('authMsg');
+    const panel   = document.getElementById('panel');
+    const tbody   = document.querySelector('#tbl tbody');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const logoutBtn  = document.getElementById('logoutBtn');
+
+    loginBtn.onclick = async ()=>{
+      try{
+        await signInWithEmailAndPassword(auth, email.value, pw.value);
+      }catch(e){ authMsg.textContent = '로그인 실패: ' + (e.code || e.message); }
+    };
+    logoutBtn.onclick = ()=> signOut(auth);
+
+    onAuthStateChanged(auth, (user)=>{
+      if(user){
+        authMsg.textContent = '로그인됨: ' + (user.email||'');
+        panel.style.display = 'block';
+        load();
+      }else{
+        authMsg.textContent = '';
+        panel.style.display = 'none';
+        tbody.innerHTML = '';
+      }
+    });
+
+    async function load(){
+      tbody.innerHTML = '';
+      const q = query(collection(db,'leads'), orderBy('createdAt','desc'));
+      const snap = await getDocs(q);
+      snap.forEach(doc=>{
+        const d = doc.data();
+        const tr = document.createElement('tr');
+        const dt = d.createdAt?.toDate ? d.createdAt.toDate() : null;
+        tr.innerHTML = `
+          <td>${d.name||''}</td>
+          <td>${d.phone||''}</td>
+          <td>${dt ? dt.toLocaleString() : '-'}</td>
+          <td title="${d.ua||''}">${(d.ua||'').slice(0,28)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    refreshBtn.onclick = load;
+  </script>
+</body>
+</html>

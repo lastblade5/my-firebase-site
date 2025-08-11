@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>홍명론 – 대출 비교 전문</title>
+  <meta name="description" content="대출 비교, 주택담보대출 상담, 제휴 금융사 안내" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#252525;           /* 페이지 배경 */
+      --surface:#2f2f2f;      /* 카드/네비 배경 */
+      --text:#f6f6f6;         /* 기본 텍스트 */
+      --muted:#bdbdbd;        /* 보조 텍스트 */
+      --accent:#f6a622;       /* 포인트(버튼/하이라이트) */
+      --accent-2:#ffd36a;     /* 포인트 라이트 */
+      --ok:#3ddc84;           /* 긍정 */
+      --border:#3b3b3b;       /* 경계선 */
+      --maxw:1120px;          /* 본문 최대 폭 */
+      --radius:18px;          /* 라운드 */
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:"Pretendard", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6; letter-spacing:-.2px;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:var(--maxw); margin-inline:auto; padding:0 20px}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(160%) blur(6px)}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 0; border-bottom:1px solid var(--border);
+      background:color-mix(in srgb, var(--bg) 92%, transparent);
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .brand .logo{width:28px; height:28px; display:grid; place-items:center; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#222; font-size:14px}
+    .menu{display:flex; align-items:center; gap:16px}
+    .menu a{padding:10px 12px; border-radius:12px; color:var(--muted)}
+    .menu a:hover{background:#00000022; color:var(--text)}
+    .cta{background:var(--text); color:#222; padding:10px 14px; border-radius:999px; font-weight:700}
+
+    /* Mobile menu */
+    .burger{display:none; width:36px; height:36px; border-radius:10px; border:1px solid var(--border); background:#00000020; place-items:center}
+    .burger span{width:18px; height:2px; background:var(--text); position:relative; display:block}
+    .burger span::before,.burger span::after{content:""; position:absolute; left:0; width:100%; height:2px; background:var(--text)}
+    .burger span::before{top:-6px} .burger span::after{top:6px}
+
+    /* Hero */
+    .hero{background:var(--surface); border-radius:var(--radius); margin-top:18px; box-shadow:var(--shadow)}
+    .hero-inner{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; padding:34px}
+    .title{font-size:40px; line-height:1.15; margin:6px 0 12px}
+    .subtitle{color:var(--muted)}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#00000025; font-weight:600; font-size:14px}
+    .btn-primary{display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#222; border:0; padding:12px 16px; border-radius:14px; font-weight:800; cursor:pointer}
+
+    /* Stats */
+    .stats{display:flex; gap:24px; margin-top:10px; flex-wrap:wrap}
+    .stat{min-width:240px; padding:14px 16px; border-radius:14px; background:#00000018; border:1px solid var(--border)}
+    .stat small{display:block; color:var(--muted)}
+    .stat strong{display:block; font-size:22px; margin-top:2px}
+
+    /* Tabs (decorative) */
+    .tabs{display:flex; gap:10px; border-bottom:1px solid var(--border); padding:0 24px; overflow:auto}
+    .tab{white-space:nowrap; padding:12px 8px; color:var(--muted)}
+    .tab.active{color:var(--text); border-bottom:3px solid var(--accent)}
+
+    /* Feature row */
+    .row{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; padding:26px 34px}
+    .card{background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:18px}
+
+    /* Illustration (inline SVG) */
+    .illu{aspect-ratio:16/10; background:#00000018; border:1px dashed var(--border); border-radius:16px; display:grid; place-items:center}
+
+    /* Partners */
+    .partners{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+    .logo-chip{border:1px solid var(--border); border-radius:12px; padding:10px 12px; background:#00000014; color:var(--muted); text-align:center; font-size:13px}
+
+    /* Right Visual */
+    .right-card{background:var(--surface); border-radius:16px; padding:16px; box-shadow:var(--shadow); display:grid; place-items:center}
+
+    /* CTA strip */
+    .cta-strip{margin:34px 0; background:linear-gradient(90deg, #2a2a2a, #1f1f1f); border:1px solid var(--border); border-radius:16px; padding:22px; display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .cta-strip .actions{display:flex; gap:10px; flex-wrap:wrap}
+
+    /* Footer */
+    footer{margin-top:34px; border-top:1px solid var(--border); padding:28px 0 60px; color:var(--muted)}
+    .foot-grid{display:grid; grid-template-columns:2fr 1fr; gap:24px}
+
+    /* Bank SVG size */
+    .bank{max-width:420px}
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .hero-inner, .row{grid-template-columns:1fr}
+      .title{font-size:34px}
+      .partners{grid-template-columns:repeat(3,1fr)}
+      .foot-grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 640px){
+      .menu{display:none}
+      .burger{display:grid}
+      .hero-inner{padding:22px}
+      .title{font-size:28px}
+      .partners{grid-template-columns:repeat(2,1fr)}
+      .stat{min-width:unset; flex:1}
+      .cta-strip{flex-direction:column; align-items:flex-start}
+    }
+    /* Mobile menu panel */
+    .sheet{position:fixed; inset:0; background:#00000088; display:none}
+    .sheet.open{display:block}
+    .sheet .panel{position:absolute; right:0; top:0; bottom:0; width:min(86vw,380px); background:var(--surface); padding:20px; border-left:1px solid var(--border); box-shadow:var(--shadow)}
+    .sheet a{display:block; padding:12px 10px; border-radius:12px; color:var(--muted)}
+    .sheet a:hover{background:#00000022; color:var(--text)}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="주요 메뉴">
+      <a class="brand" href="#top">
+        <span class="logo" aria-hidden>금</span>
+        <span>홍명론 <span style="color:var(--muted); font-weight:600">대출전문</span></span>
+      </a>
+      <nav class="menu" aria-label="헤더 메뉴">
+        <a href="#compare">대출 비교</a>
+        <a href="#products">상품목록</a>
+        <a href="#faq">FAQ</a>
+        <a href="#partners">제휴사</a>
+        <a class="cta" href="#consult">문의하기</a>
+      </nav>
+      <button class="burger" id="openSheet" aria-label="모바일 메뉴 열기"><span></span></button>
+    </div>
+  </header>
+
+  <!-- Mobile sheet -->
+  <div class="sheet" id="sheet" aria-hidden="true">
+    <div class="panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+        <div class="brand"><span class="logo">금</span><span>홍명론</span></div>
+        <button class="burger" id="closeSheet" aria-label="모바일 메뉴 닫기"><span></span></button>
+      </div>
+      <a href="#compare">대출 비교</a>
+      <a href="#products">상품목록</a>
+      <a href="#faq">FAQ</a>
+      <a href="#partners">제휴사</a>
+      <a class="cta" href="#consult" style="display:inline-flex; margin-top:8px">문의하기</a>
+    </div>
+  </div>
+
+  <main id="top" class="container">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div>
+          <span class="pill">더 많이, 더 정확한 비교</span>
+          <h1 id="hero-title" class="title">홍명으로 찾다</h1>
+          <p class="subtitle">당신에게 가장 적합한 주택담보 대출을 찾아드립니다. 조건 비교, 금리 분석, 한 번에.</p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn-primary" href="#compare">대출 비교하기</a>
+            <a class="btn-primary" style="background:#00000022; color:var(--text)" href="#consult">상담 요청하기</a>
+          </div>
+          <div class="stats" role="list" aria-label="누적 통계">
+            <div class="stat" role="listitem"><small>누적 방문자 수</small><strong>1,000,000,000명</strong></div>
+            <div class="stat" role="listitem"><small>누적 대출 비교 금액</small><strong>100조 9,999억 9,999만</strong></div>
+          </div>
+        </div>
+        <div aria-hidden="true">
+          <!-- Simple house illustration -->
+          <div class="illu">
+            <svg viewBox="0 0 200 140" width="100%" height="100%" aria-hidden="true">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1">
+                  <stop stop-color="#7dd3fc" offset="0" />
+                  <stop stop-color="#38bdf8" offset="1" />
+                </linearGradient>
+                <linearGradient id="coin" x1="0" x2="1">
+                  <stop stop-color="#ffd36a" offset="0" />
+                  <stop stop-color="#f6a622" offset="1" />
+                </linearGradient>
+              </defs>
+              <rect x="10" y="90" width="180" height="40" rx="8" fill="#00000022" />
+              <polygon points="40,75 100,35 160,75" fill="url(#g1)" />
+              <rect x="50" y="75" width="100" height="45" rx="6" fill="#e5f4ff" />
+              <rect x="120" y="85" width="20" height="35" rx="4" fill="#bde0ff" />
+              <circle cx="60" cy="95" r="8" fill="#ff8ea1" />
+              <circle cx="75" cy="86" r="6" fill="#ffb1c1" />
+              <!-- coins -->
+              <g>
+                <ellipse cx="35" cy="110" rx="16" ry="8" fill="url(#coin)" />
+                <ellipse cx="55" cy="115" rx="16" ry="8" fill="url(#coin)" />
+                <circle cx="110" cy="116" r="14" fill="url(#coin)" />
+                <text x="110" y="121" text-anchor="middle" font-size="12" font-weight="800" fill="#794b00">₩</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative Tabs -->
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true">주택담보대출 찾기</button>
+        <button class="tab" role="tab">사업자 대출</button>
+        <button class="tab" role="tab">전월세 대출</button>
+        <button class="tab" role="tab">사회 초년생</button>
+      </div>
+
+      <!-- Feature Row -->
+      <div class="row" id="compare">
+        <div class="card">
+          <h2 style="margin:0 0 6px">빠르고 정확한 비교</h2>
+          <p class="subtitle">은행, 저축은행, 캐피탈 등 다양한 제휴사 조건을 한 화면에서. 신용도 영향 없이 사전한도 확인이 가능합니다.</p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn-primary" href="#consult">나의 한도 미리보기</a>
+            <a class="btn-primary" style="background:#00000022; color:var(--text)" href="#faq">자주 묻는 질문</a>
+          </div>
+        </div>
+        <div class="right-card" aria-hidden="true">
+          <!-- Bank illustration -->
+          <svg class="bank" viewBox="0 0 220 170" role="img" aria-label="BANK 아이콘">
+            <defs>
+              <linearGradient id="stone" x1="0" x2="1">
+                <stop stop-color="#ffe29a" offset="0" />
+                <stop stop-color="#f7c96a" offset="1" />
+              </linearGradient>
+            </defs>
+            <g fill="url(#stone)">
+              <polygon points="20,60 110,20 200,60" />
+              <rect x="20" y="60" width="180" height="18" rx="4" />
+              <rect x="30" y="78" width="18" height="54" rx="3" />
+              <rect x="66" y="78" width="18" height="54" rx="3" />
+              <rect x="102" y="78" width="18" height="54" rx="3" />
+              <rect x="138" y="78" width="18" height="54" rx="3" />
+              <rect x="174" y="78" width="18" height="54" rx="3" />
+              <rect x="20" y="132" width="180" height="16" rx="4" />
+            </g>
+            <text x="110" y="56" text-anchor="middle" font-size="18" font-weight="900" fill="#6a4b00">BANK</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners -->
+    <section id="partners" style="margin-top:26px">
+      <h3 style="margin:0 0 12px">홍명론 제휴사와 금융상품 업무를 함께 하고 있어요</h3>
+      <div class="partners" aria-label="제휴사 목록">
+        <div class="logo-chip">KB국민은행</div>
+        <div class="logo-chip">신한은행</div>
+        <div class="logo-chip">하나은행</div>
+        <div class="logo-chip">우리은행</div>
+        <div class="logo-chip">NH농협</div>
+        <div class="logo-chip">BNK부산</div>
+        <div class="logo-chip">IBK기업</div>
+        <div class="logo-chip">SC제일</div>
+        <div class="logo-chip">카카오뱅크</div>
+        <div class="logo-chip">케이뱅크</div>
+        <div class="logo-chip">저축은행</div>
+        <div class="logo-chip">현대캐피탈</div>
+      </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section id="consult" class="cta-strip" aria-labelledby="consult-title">
+      <div>
+        <h3 id="consult-title" style="margin:0 0 6px">맞춤 상담이 필요하신가요?</h3>
+        <p class="subtitle" style="margin:0">연락처를 남겨주시면 평일 기준 빠르게 연락드려요. (신용조회 無)</p>
+      </div>
+      <form id="leadForm" style="display:flex; gap:10px; flex-wrap:wrap">
+        <label class="sr-only" for="name">이름</label>
+        <input id="name" name="name" required placeholder="이름" pattern=".{2,}" title="이름을 입력하세요" style="padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#00000018; color:var(--text)" />
+        <label class="sr-only" for="phone">연락처</label>
+        <input id="phone" name="phone" required placeholder="연락처" inputmode="tel" pattern="[0-9\-]{9,}" title="숫자와 하이픈만 입력" style="padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:#00000018; color:var(--text)" />
+        <button class="btn-primary" type="submit">상담 신청</button>
+        <span id="formMsg" class="subtitle" role="status" aria-live="polite"></span>
+      </form>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="margin:24px 0 4px">
+      <details class="card"><summary style="cursor:pointer; font-weight:700">신용점수에 영향이 있나요?</summary><p class="subtitle">사전한도 조회는 신용점수에 영향이 없습니다. 실제 실행 단계에서만 조회가 이뤄집니다.</p></details>
+      <details class="card"><summary style="cursor:pointer; font-weight:700">상담은 무료인가요?</summary><p class="subtitle">네, 모든 상담은 무료이며 언제든 해지하실 수 있습니다.</p></details>
+      <details class="card"><summary style="cursor:pointer; font-weight:700">소요 시간은 얼마나 걸리나요?</summary><p class="subtitle">간단 정보 입력 시 평균 3분 내로 조건 비교가 가능합니다.</p></details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:8px"><span class="logo">금</span><strong>홍명론</strong></div>
+        <p class="subtitle">© 2025 Hongmyeong Finance. 모든 권리 보유. 본 페이지의 내용은 예시이며 실제 금융 서비스가 아닙니다.</p>
+      </div>
+      <div style="justify-self:end; display:flex; gap:10px">
+        <a class="logo-chip" href="#top">TOP</a>
+        <a class="logo-chip" href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile sheet toggle
+    const sheet = document.getElementById('sheet');
+    document.getElementById('openSheet').addEventListener('click', ()=>{
+      sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false');
+    });
+    document.getElementById('closeSheet').addEventListener('click', ()=>{
+      sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true');
+    });
+    sheet.addEventListener('click', (e)=>{ if(e.target===sheet){ sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); } });
+
+
+
+    // Smooth anchor scroll for better UX
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          e.preventDefault();
+          document.querySelector(id).scrollIntoView({behavior:'smooth'});
+          sheet.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
+  <style>
+    /* A11y helpers */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</body>
+
+<script type="module">
+  // Firebase v12 CDN (버전 12.1.0)
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } 
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+  // ✅ 콘솔 > 프로젝트 설정 > 일반 > 내 앱 > 구성에서 복사해 붙여넣기
+  const firebaseConfig = {
+      apiKey: "AIzaSyALgkCl2UfoWfM3jdUSRUOkAA0O_OOwqM8",
+    authDomain: "webtest1-4b9ee.firebaseapp.com",
+    projectId: "webtest1-4b9ee",
+    storageBucket: "webtest1-4b9ee.firebasestorage.app",
+    messagingSenderId: "37508520361",
+    appId: "1:37508520361:web:57a35b65b8b3f1b486ccb8",
+    measurementId: "G-F11055HQJT"
+  };
+
+  // 초기화
+  const app = initializeApp(firebaseConfig);
+  try { getAnalytics(app); } catch(_) { /* 로컬/HTTP 환경이면 무시 */ }
+
+  // Firestore 핸들러
+  const db  = getFirestore(app);
+  const form = document.getElementById('leadForm');
+  const msg  = document.getElementById('formMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    const btn = form.querySelector('button[type="submit"]');
+
+    // 간단한 UX
+    btn.disabled = true;
+    msg.textContent = '저장 중...';
+
+    try {
+      await addDoc(collection(db, 'leads'), {
+        name:  data.name,
+        phone: data.phone,
+        // 필요시 메모, 출처 등 필드 추가 가능
+        createdAt: serverTimestamp(),
+        path: location.pathname,
+        ua: navigator.userAgent
+      });
+
+      msg.textContent = '접수 되었습니다! 곧 연락드릴게요.';
+      form.reset();
+      setTimeout(()=> msg.textContent = '', 4000);
+    } catch (err) {
+      console.error(err);
+      msg.textContent = '저장 실패: ' + err.message; // 규칙 오류시 메시지 표시
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</html>
