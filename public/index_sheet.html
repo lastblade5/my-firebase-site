@@ -10,17 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#ffffff;       /* 전체 배경 흰색 */
-      --surface:#f9f9f9;  /* 카드/섹션 배경 밝은 회색 */
-      --text:#222222;     /* 기본 텍스트 검정 */
-      --muted:#666666;    /* 보조 텍스트 */
-      --accent:#f6a622;
-      --accent-2:#ffd36a;
-      --ok:#3ddc84;
-      --border:#dddddd;   /* 테두리 밝은 회색 */
-      --maxw:1120px;
-      --radius:18px;
-      --shadow:0 10px 30px rgba(0,0,0,.1); /* 그림자 연하게 */
+      --bg:#252525; --surface:#2f2f2f; --text:#f6f6f6; --muted:#bdbdbd;
+      --accent:#f6a622; --accent-2:#ffd36a; --ok:#3ddc84; --border:#3b3b3b;
+      --maxw:1120px; --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.25);
     }
     *{box-sizing:border-box} html,body{height:100%}
     body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;letter-spacing:-.2px}
@@ -33,10 +25,10 @@
     .brand .logo{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#222;font-size:14px}
     .menu{display:flex;align-items:center;gap:16px}
     .menu a{padding:10px 12px;border-radius:12px;color:var(--muted)}
-    .menu a:hover{background:#00000010;color:var(--text)}
-    .cta{background:var(--text);color:#fff;padding:10px 14px;border-radius:999px;font-weight:700}
+    .menu a:hover{background:#00000022;color:var(--text)}
+    .cta{background:var(--text);color:#222;padding:10px 14px;border-radius:999px;font-weight:700}
 
-    .burger{display:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:#00000010;place-items:center}
+    .burger{display:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:#00000020;place-items:center}
     .burger span{width:18px;height:2px;background:var(--text);position:relative;display:block}
     .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:100%;height:2px;background:var(--text)}
     .burger span::before{top:-6px}.burger span::after{top:6px}
@@ -45,11 +37,11 @@
     .hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;padding:34px}
     .title{font-size:40px;line-height:1.15;margin:6px 0 12px}
     .subtitle{color:var(--muted)}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#00000015;font-weight:600;font-size:14px}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#00000025;font-weight:600;font-size:14px}
     .btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#222;border:0;padding:12px 16px;border-radius:14px;font-weight:800;cursor:pointer}
 
     .stats{display:flex;gap:24px;margin-top:10px;flex-wrap:wrap}
-    .stat{min-width:240px;padding:14px 16px;border-radius:14px;background:#00000008;border:1px solid var(--border)}
+    .stat{min-width:240px;padding:14px 16px;border-radius:14px;background:#00000018;border:1px solid var(--border)}
     .stat small{display:block;color:var(--muted)} .stat strong{display:block;font-size:22px;margin-top:2px}
 
     .tabs{display:flex;gap:10px;border-bottom:1px solid var(--border);padding:0 24px;overflow:auto}
@@ -58,14 +50,14 @@
     .row{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;padding:26px 34px}
     .card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:18px}
 
-    .illu{aspect-ratio:16/10;background:#00000008;border:1px dashed var(--border);border-radius:16px;display:grid;place-items:center;overflow:hidden}
+    .illu{aspect-ratio:16/10;background:#00000018;border:1px dashed var(--border);border-radius:16px;display:grid;place-items:center;overflow:hidden}
     .illu img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(105%)}
 
     .partners{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .logo-chip{border:1px solid var(--border);border-radius:12px;padding:10px 12px;background:#f1f1f1;color:var(--muted);text-align:center;font-size:13px}
+    .logo-chip{border:1px solid var(--border);border-radius:12px;padding:10px 12px;background:#00000014;color:var(--muted);text-align:center;font-size:13px}
 
     .right-card{background:var(--surface);border-radius:16px;padding:16px;box-shadow:var(--shadow);display:grid;place-items:center}
-    .cta-strip{margin:34px 0;background:linear-gradient(90deg,#f9f9f9,#f0f0f0);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .cta-strip{margin:34px 0;background:linear-gradient(90deg,#2a2a2a,#1f1f1f);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 
     footer{margin-top:34px;border-top:1px solid var(--border);padding:28px 0 60px;color:var(--muted)}
     .foot-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px}
@@ -83,11 +75,11 @@
       .partners{grid-template-columns:repeat(2,1fr)} .stat{min-width:unset;flex:1}
       .cta-strip{flex-direction:column;align-items:flex-start}
     }
-    .sheet{position:fixed;inset:0;background:#00000066;display:none}
+    .sheet{position:fixed;inset:0;background:#00000088;display:none}
     .sheet.open{display:block}
     .sheet .panel{position:absolute;right:0;top:0;bottom:0;width:min(86vw,380px);background:var(--surface);padding:20px;border-left:1px solid var(--border);box-shadow:var(--shadow)}
     .sheet a{display:block;padding:12px 10px;border-radius:12px;color:var(--muted)}
-    .sheet a:hover{background:#00000010;color:var(--text)}
+    .sheet a:hover{background:#00000022;color:var(--text)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 </head>
@@ -187,17 +179,17 @@
         <label class="sr-only" for="name">이름</label>
         <input id="name" name="name" placeholder="이름" minlength="2" maxlength="30" required
                autocomplete="name" inputmode="text"
-               style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--text)" />
+               style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#00000018;color:var(--text)" />
 
         <label class="sr-only" for="phone">연락처</label>
         <input id="phone" name="phone" placeholder="연락처(숫자만 입력)" required
                autocomplete="tel" inputmode="tel" maxlength="13"
-               style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--text)" />
+               style="padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#00000018;color:var(--text)" />
 
         <label class="sr-only" for="message">상담내용</label>
         <textarea id="message" name="message" minlength="30" maxlength="400" required
           placeholder="상담받고 싶은 내용을 30자 이상 자세히 적어주세요"
-          style="flex:1 1 100%;min-height:96px;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--text);resize:vertical"></textarea>
+          style="flex:1 1 100%;min-height:96px;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#00000018;color:var(--text);resize:vertical"></textarea>
 
         <small id="msgCounter" class="subtitle" aria-live="polite" style="flex:1 1 100%;">0 / 400</small>
 
@@ -208,4 +200,63 @@
 
     <section id="faq" style="margin:24px 0 4px">
       <details class="card"><summary style="cursor:pointer;font-weight:700">신용점수에 영향이 있나요?</summary><p class="subtitle">사전한도 조회는 신용점수에 영향이 없습니다. 실제 실행 단계에서만 조회가 이뤄집니다.</p></details>
-      <details class="card
+      <details class="card"><summary style="cursor:pointer;font-weight:700">상담은 무료인가요?</summary><p class="subtitle">네, 모든 상담은 무료이며 언제든 해지하실 수 있습니다.</p></details>
+      <details class="card"><summary style="cursor:pointer;font-weight:700">소요 시간은 얼마나 걸리나요?</summary><p class="subtitle">간단 정보 입력 시 평균 3분 내로 조건 비교가 가능합니다.</p></details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:8px"><span class="logo">금</span><strong>모비</strong></div>
+        <p class="subtitle">© 2025 Mobi Finance. 모든 권리 보유. 본 페이지의 내용은 예시이며 실제 금융 서비스가 아닙니다.</p>
+      </div>
+      <div style="justify-self:end;display:flex;gap:10px">
+        <a class="logo-chip" href="#top">TOP</a><a class="logo-chip" href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- UX 스크립트 (시트 토글, 스크롤, 카운터, 전화번호 포맷) -->
+  <script>
+    const sheet = document.getElementById('sheet');
+    document.getElementById('openSheet').addEventListener('click', ()=>{ sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); });
+    document.getElementById('closeSheet').addEventListener('click', ()=>{ sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); });
+    sheet.addEventListener('click', (e)=>{ if(e.target===sheet){ sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); } });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth'}); sheet.classList.remove('open'); }
+      });
+    });
+
+    // 글자수 카운터
+    const textarea = document.getElementById('message');
+    const counter  = document.getElementById('msgCounter');
+    const updateCounter = () => counter.textContent = `${textarea.value.length} / ${textarea.maxLength}`;
+    textarea.addEventListener('input', updateCounter); updateCounter();
+
+    // 전화번호 숫자만 + 하이픈 포맷
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', () => {
+      let v = phoneInput.value.replace(/\D/g,'');           // 숫자만
+      if (v.length <= 3) phoneInput.value = v;
+      else if (v.length <= 7) phoneInput.value = `${v.slice(0,3)}-${v.slice(3)}`;
+      else phoneInput.value = `${v.slice(0,3)}-${v.slice(3,7)}-${v.slice(7,11)}`;
+    });
+  </script>
+
+  <!-- Firebase + Firestore 저장 -->
+  <script type="module">
+  <a class="btn-primary" href=<a class="btn-primary" href="https://docs.google.com/forms/d/e/폼_ID/viewform" target="_blank">
+  상담 신청하기
+</a>
+target="_blank">
+  상담 신청하기
+</a>
+
+  
+    </script>
+</body>
+</html>
